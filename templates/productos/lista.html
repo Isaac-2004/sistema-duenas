@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Productos{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Productos</h2>
+  <a href="{{ url_for('productos.nuevo') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg">+ Nuevo</a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+  <form method="GET" class="flex flex-wrap gap-2">
+    <input name="q" value="{{ q }}" placeholder="Buscar producto o código…"
+           class="flex-1 min-w-0 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+    <select name="categoria" class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+      <option value="">Todas las categorías</option>
+      {% for cat in categorias %}
+        <option value="{{ cat.id_categoria }}" {{ 'selected' if cat_sel|string == cat.id_categoria|string }}>{{ cat.nombre }}</option>
+      {% endfor %}
+    </select>
+    <label class="flex items-center gap-1 text-sm text-gray-600 border border-gray-300 rounded-lg px-3 py-2">
+      <input type="checkbox" name="bajo_stock" value="1" {{ 'checked' if bajo_stock }}> Bajo stock
+    </label>
+    <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm">Filtrar</button>
+  </form>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-3 text-left">Producto</th>
+          <th class="px-4 py-3 text-left hidden sm:table-cell">Categoría</th>
+          <th class="px-4 py-3 text-right">Precio</th>
+          <th class="px-4 py-3 text-right">Stock</th>
+          <th class="px-4 py-3 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for p in productos %}
+        {% set bajo = p.stock_actual <= p.stock_minimo %}
+        <tr class="hover:bg-gray-50 {{ 'bg-red-50' if bajo else '' }}">
+          <td class="px-4 py-3">
+            <p class="font-medium text-gray-900">{{ p.nombre }}</p>
+            <p class="text-xs text-gray-400">{{ p.codigo }}</p>
+          </td>
+          <td class="px-4 py-3 text-gray-600 hidden sm:table-cell">{{ p.categoria }}</td>
+          <td class="px-4 py-3 text-right font-medium">${{ "%.2f"|format(p.precio_venta) }}</td>
+          <td class="px-4 py-3 text-right">
+            <span class="font-medium {{ 'text-red-600' if bajo else 'text-gray-800' }}">
+              {{ p.stock_actual }} {{ p.unidad }}
+            </span>
+            {% if bajo %}<span class="text-xs text-red-500 block">⚠ mín {{ p.stock_minimo }}</span>{% endif %}
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ url_for('productos.editar', id=p.id_producto) }}" class="text-gray-600 hover:underline text-xs mr-2">Editar</a>
+            <a href="{{ url_for('productos.ajustar_stock', id=p.id_producto) }}" class="text-blue-600 hover:underline text-xs">Ajustar</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">No se encontraron productos.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Cliente: {{ cliente.nombres }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('clientes.lista') }}" class="text-gray-500 hover:text-gray-700 text-sm">← Clientes</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">{{ cliente.nombres }} {{ cliente.apellidos or '' }}</h2>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+  <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-5">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="font-semibold text-gray-700">Información del Cliente</h3>
+      <a href="{{ url_for('clientes.editar', id=cliente.id_cliente) }}"
+         class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg">Editar</a>
+    </div>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      <div><span class="text-gray-500">Tipo:</span> <span class="font-medium">{{ cliente.tipo_cliente }}</span></div>
+      <div><span class="text-gray-500">Cédula/RUC:</span> <span class="font-medium">{{ cliente.cedula_ruc or '—' }}</span></div>
+      <div><span class="text-gray-500">Celular:</span> <span class="font-medium">{{ cliente.celular or '—' }}</span></div>
+      <div><span class="text-gray-500">Email:</span> <span class="font-medium">{{ cliente.email or '—' }}</span></div>
+      <div><span class="text-gray-500">Ciudad:</span> <span class="font-medium">{{ cliente.ciudad or '—' }}</span></div>
+      <div><span class="text-gray-500">Límite crédito:</span> <span class="font-medium">${{ "%.2f"|format(cliente.limite_credito) }}</span></div>
+    </div>
+    {% if cliente.notas %}
+      <p class="mt-3 text-xs text-gray-500 bg-gray-50 rounded p-2">{{ cliente.notas }}</p>
+    {% endif %}
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5">
+    <h3 class="font-semibold text-gray-700 mb-3">Resumen de Deuda</h3>
+    {% set total_deuda = deudas|sum(attribute='saldo_pendiente') %}
+    <p class="text-3xl font-bold {{ 'text-red-600' if total_deuda > 0 else 'text-green-600' }}">
+      ${{ "%.2f"|format(total_deuda) }}
+    </p>
+    <p class="text-xs text-gray-500 mt-1">Saldo pendiente total</p>
+    {% if total_deuda > 0 %}
+      <a href="{{ url_for('cobros.lista_cliente', id_cliente=cliente.id_cliente) }}"
+         class="mt-3 block text-center bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-lg font-medium">
+        Registrar Abono
+      </a>
+    {% endif %}
+    <a href="{{ url_for('pedidos.nuevo') }}?cliente_id={{ cliente.id_cliente }}"
+       class="mt-2 block text-center bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-lg font-medium">
+      + Nuevo Pedido
+    </a>
+  </div>
+</div>
+
+<!-- Cuentas por cobrar -->
+{% if deudas %}
+<div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+  <h3 class="font-semibold text-gray-700 mb-3">Cuentas por Cobrar</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="text-xs text-gray-500 uppercase bg-gray-50">
+        <tr>
+          <th class="px-3 py-2 text-left">Venta</th>
+          <th class="px-3 py-2 text-right">Total</th>
+          <th class="px-3 py-2 text-right">Pagado</th>
+          <th class="px-3 py-2 text-right">Saldo</th>
+          <th class="px-3 py-2 text-left">Vencimiento</th>
+          <th class="px-3 py-2 text-center">Estado</th>
+          <th class="px-3 py-2"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for d in deudas %}
+        {% set vencida = d.fecha_vencimiento < now().date() and d.estado not in ('PAGADA',) %}
+        <tr class="{{ 'bg-red-50' if vencida else '' }}">
+          <td class="px-3 py-2 font-medium">{{ d.numero_venta }}</td>
+          <td class="px-3 py-2 text-right">${{ "%.2f"|format(d.monto_total) }}</td>
+          <td class="px-3 py-2 text-right text-green-700">${{ "%.2f"|format(d.monto_pagado) }}</td>
+          <td class="px-3 py-2 text-right font-semibold {{ 'text-red-600' if d.saldo_pendiente > 0 }}">${{ "%.2f"|format(d.saldo_pendiente) }}</td>
+          <td class="px-3 py-2 {{ 'text-red-600 font-medium' if vencida }}">{{ d.fecha_vencimiento.strftime('%d/%m/%Y') }}</td>
+          <td class="px-3 py-2 text-center">
+            <span class="px-2 py-0.5 rounded-full text-xs
+              {{ 'bg-green-100 text-green-700' if d.estado=='PAGADA' else 'bg-orange-100 text-orange-700' if d.estado=='PAGADA_PARCIAL' else 'bg-red-100 text-red-700' if d.estado=='VENCIDA' else 'bg-yellow-100 text-yellow-700' }}">
+              {{ d.estado.replace('_',' ') }}
+            </span>
+          </td>
+          <td class="px-3 py-2">
+            {% if d.estado != 'PAGADA' %}
+              <a href="{{ url_for('cobros.abonar', id_cuenta=d.id_cuenta) }}"
+                 class="text-xs text-blue-600 hover:underline">Abonar</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<!-- Últimos pedidos -->
+<div class="bg-white rounded-xl shadow-sm p-4">
+  <h3 class="font-semibold text-gray-700 mb-3">Últimos Pedidos</h3>
+  {% if ultimos_pedidos %}
+    <div class="space-y-2">
+      {% for p in ultimos_pedidos %}
+        <div class="flex justify-between items-center text-sm py-1">
+          <span class="text-gray-600">{{ p.fecha_pedido.strftime('%d/%m/%Y') }}</span>
+          <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600">{{ p.estado }}</span>
+          <a href="{{ url_for('pedidos.detalle', id=p.id_pedido) }}" class="text-blue-600 hover:underline">Ver →</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-sm text-gray-400">Sin pedidos registrados.</p>
+  {% endif %}
+</div>
+{% endblock %}

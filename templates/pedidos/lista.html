@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Pedidos{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Pedidos</h2>
+  <a href="{{ url_for('pedidos.nuevo') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg">+ Nuevo Pedido</a>
+</div>
+
+<!-- Filtros por estado -->
+<div class="flex gap-2 mb-4 overflow-x-auto pb-1">
+  {% for est, label, color in [
+      ('', 'Todos', 'gray'),
+      ('PENDIENTE', 'Pendientes', 'yellow'),
+      ('CONFIRMADO', 'Confirmados', 'blue'),
+      ('EN_PROCESO', 'En proceso', 'purple'),
+      ('ENTREGADO', 'Entregados', 'green'),
+      ('CANCELADO', 'Cancelados', 'red'),
+  ] %}
+    <a href="{{ url_for('pedidos.lista', estado=est) }}"
+       class="whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium border transition-colors
+              {{ 'bg-' + color + '-600 text-white border-transparent' if estado_sel == est
+                 else 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50' }}">
+      {{ label }}
+    </a>
+  {% endfor %}
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-3 text-left">#</th>
+          <th class="px-4 py-3 text-left">Cliente</th>
+          <th class="px-4 py-3 text-left hidden sm:table-cell">Fecha</th>
+          <th class="px-4 py-3 text-left hidden md:table-cell">Canal</th>
+          <th class="px-4 py-3 text-center">Estado</th>
+          <th class="px-4 py-3 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for p in pedidos %}
+        {% set colores = {'PENDIENTE':'yellow','CONFIRMADO':'blue','EN_PROCESO':'purple','ENTREGADO':'green','CANCELADO':'red'} %}
+        {% set c = colores.get(p.estado, 'gray') %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3 text-gray-400 font-mono text-xs">#{{ p.id_pedido }}</td>
+          <td class="px-4 py-3">
+            <p class="font-medium text-gray-900">{{ p.cliente }}</p>
+            {% if p.celular %}<p class="text-xs text-gray-400">{{ p.celular }}</p>{% endif %}
+          </td>
+          <td class="px-4 py-3 text-gray-600 text-xs hidden sm:table-cell">
+            {{ p.fecha_pedido.strftime('%d/%m/%Y %H:%M') }}
+            {% if p.fecha_entrega %}<br><span class="text-green-600">Entrega: {{ p.fecha_entrega.strftime('%d/%m/%Y') }}</span>{% endif %}
+          </td>
+          <td class="px-4 py-3 hidden md:table-cell">
+            <span class="text-xs text-gray-500">{{ p.canal_origen or 'WHATSAPP' }}</span>
+          </td>
+          <td class="px-4 py-3 text-center" x-data>
+            <form method="POST" action="{{ url_for('pedidos.cambiar_estado', id=p.id_pedido) }}" class="inline">
+              <select name="estado" onchange="this.form.submit()"
+                      class="text-xs border-0 rounded-full px-2 py-1 font-medium bg-{{ c }}-100 text-{{ c }}-700 focus:outline-none cursor-pointer">
+                {% for opt in ['PENDIENTE','CONFIRMADO','EN_PROCESO','ENTREGADO','CANCELADO'] %}
+                  <option value="{{ opt }}" {{ 'selected' if opt == p.estado }}>{{ opt.replace('_',' ') }}</option>
+                {% endfor %}
+              </select>
+            </form>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ url_for('pedidos.detalle', id=p.id_pedido) }}" class="text-blue-600 hover:underline text-xs mr-2">Ver</a>
+            {% if p.estado != 'CANCELADO' and p.estado != 'ENTREGADO' %}
+              <a href="{{ url_for('pedidos.convertir_venta', id=p.id_pedido) }}" class="text-green-600 hover:underline text-xs">→ Venta</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="px-4 py-8 text-center text-gray-400">No hay pedidos.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Audit Logs{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('seguridad.usuarios_lista') }}" class="text-gray-500 text-sm">← Seguridad</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">📋 Audit Logs</h2>
+</div>
+
+<!-- Filtros -->
+<div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+  <form method="GET" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div>
+      <label class="block text-xs font-medium text-gray-600 mb-1">Módulo</label>
+      <select name="modulo"
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+        <option value="">— Todos —</option>
+        {% for m in modulos %}
+        <option value="{{ m.modulo }}" {{ 'selected' if filtros.modulo == m.modulo }}>
+          {{ m.modulo }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label class="block text-xs font-medium text-gray-600 mb-1">Acción</label>
+      <input name="accion" value="{{ filtros.accion }}" placeholder="ej: LOGIN"
+             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+    </div>
+    <div>
+      <label class="block text-xs font-medium text-gray-600 mb-1">Usuario</label>
+      <input name="usuario" value="{{ filtros.usuario }}" placeholder="username"
+             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+    </div>
+    <div>
+      <label class="block text-xs font-medium text-gray-600 mb-1">Fecha</label>
+      <input name="fecha" type="date" value="{{ filtros.fecha }}"
+             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+    </div>
+    <div class="col-span-2 sm:col-span-4 flex gap-2">
+      <button type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg">
+        Filtrar
+      </button>
+      <a href="{{ url_for('seguridad.logs') }}"
+         class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded-lg">
+        Limpiar
+      </a>
+    </div>
+  </form>
+</div>
+
+<!-- Tabla -->
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+    <span class="text-sm text-gray-500">{{ logs|length }} evento(s) (máx. 500)</span>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+        <tr>
+          <th class="px-3 py-2 text-left">Fecha</th>
+          <th class="px-3 py-2 text-left">Usuario</th>
+          <th class="px-3 py-2 text-left">Acción</th>
+          <th class="px-3 py-2 text-left hidden sm:table-cell">Módulo</th>
+          <th class="px-3 py-2 text-left hidden md:table-cell">Descripción</th>
+          <th class="px-3 py-2 text-center">Resultado</th>
+          <th class="px-3 py-2 text-left hidden lg:table-cell">IP</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for log in logs %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-3 py-2 text-gray-500 text-xs whitespace-nowrap">
+            {{ log.created_at.strftime('%d/%m/%y %H:%M') if log.created_at else '—' }}
+          </td>
+          <td class="px-3 py-2 font-mono text-xs text-gray-700">{{ log.usuario }}</td>
+          <td class="px-3 py-2">
+            <span class="px-1.5 py-0.5 rounded text-xs font-medium
+              {% if 'LOGIN' in log.accion %}bg-blue-100 text-blue-700
+              {% elif 'CREAR' in log.accion %}bg-green-100 text-green-700
+              {% elif 'ANULAR' in log.accion or 'ELIMINAR' in log.accion %}bg-red-100 text-red-700
+              {% else %}bg-gray-100 text-gray-600{% endif %}">
+              {{ log.accion }}
+            </span>
+          </td>
+          <td class="px-3 py-2 text-gray-500 text-xs hidden sm:table-cell">{{ log.modulo }}</td>
+          <td class="px-3 py-2 text-gray-600 text-xs hidden md:table-cell max-w-xs truncate">
+            {{ log.descripcion }}
+          </td>
+          <td class="px-3 py-2 text-center">
+            {% if log.resultado == 'EXITO' %}
+              <span class="text-green-600 text-xs">✓</span>
+            {% elif log.resultado == 'FALLO' %}
+              <span class="text-orange-500 text-xs">⚠</span>
+            {% else %}
+              <span class="text-red-500 text-xs">✗</span>
+            {% endif %}
+          </td>
+          <td class="px-3 py-2 text-gray-400 text-xs hidden lg:table-cell font-mono">
+            {{ log.ip_address or '—' }}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7" class="px-4 py-8 text-center text-gray-400 text-sm">
+            Sin eventos registrados.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

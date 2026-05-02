@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Categorías{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Categorías</h2>
+  <a href="{{ url_for('catalogos.categorias_nueva') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg">+ Nueva</a>
+</div>
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+      <tr>
+        <th class="px-4 py-3 text-left">Nombre</th>
+        <th class="px-4 py-3 text-left hidden sm:table-cell">Descripción</th>
+        <th class="px-4 py-3 text-center">Estado</th>
+        <th class="px-4 py-3 text-right">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for cat in categorias %}
+      <tr class="hover:bg-gray-50">
+        <td class="px-4 py-3 font-medium">{{ cat.nombre }}</td>
+        <td class="px-4 py-3 text-gray-600 hidden sm:table-cell">{{ cat.descripcion or '—' }}</td>
+        <td class="px-4 py-3 text-center">
+          <span class="px-2 py-0.5 rounded-full text-xs {{ 'bg-green-100 text-green-700' if cat.estado else 'bg-red-100 text-red-700' }}">{{ 'Activo' if cat.estado else 'Inactivo' }}</span>
+        </td>
+        <td class="px-4 py-3 text-right">
+          <a href="{{ url_for('catalogos.categorias_editar', id=cat.id_categoria) }}" class="text-gray-600 hover:underline text-xs">Editar</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="px-4 py-8 text-center text-gray-400">No hay categorías.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

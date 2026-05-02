@@ -1,0 +1,1328 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.28:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 297-594-205
+127.0.0.1 - - [01/May/2026 19:00:32] "GET / HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:09:05] "GET / HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:09:05] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:09:06] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [01/May/2026 19:09:16] "POST /login HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\GIYD2\\OneDrive\\Documentos\\Proyectos\\ProyectoDistribuidoraDuenas\\SistemaDeGestion\\config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 297-594-205
+127.0.0.1 - - [01/May/2026 19:15:15] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:15:16] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [01/May/2026 19:15:24] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:15:32] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:18:05] "POST /login HTTP/1.1" 200 -
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Exception in thread Thread-9 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-10 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-11 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-12 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+127.0.0.1 - - [01/May/2026 19:19:46] "GET /login HTTP/1.1" 200 -
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-14 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-15 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+thread '<unnamed>' panicked at src\lib.rs:108:30:
+range end index 22 out of range for slice of length 21
+Exception in thread Thread-16 (process_request_thread):
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 399, in handle
+    super().handle()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\GIYD2\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\serving.py", line 334, in execute
+    for data in application_iter:
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\werkzeug\debug\__init__.py", line 347, in debug_application
+    app_iter = self.app(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 162, in login
+    pw_ok = bcrypt.checkpw(
+            ^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: range end index 22 out of range for slice of length 21
+127.0.0.1 - - [01/May/2026 19:22:09] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:22:17] "POST /login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\auth.py", line 175, in login
+    usuario['id_usuario'], usuario['id_rol'], bool(usuario['es_admin'])
+                                                   ^^^^^^^^^^^^^^^^^^^^
+KeyError: 'es_admin'
+127.0.0.1 - - [01/May/2026 19:22:18] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:22:18] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:22:18] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=KM57Ou4QIuLnurBxNxRR HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:22:18] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Detected change in 'C:\\Users\\GIYD2\\OneDrive\\Documentos\\Proyectos\\ProyectoDistribuidoraDuenas\\SistemaDeGestion\\app\\auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 297-594-205
+127.0.0.1 - - [01/May/2026 19:24:01] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:24:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:04] "GET /static/css/custom.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:04] "GET /static/js/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:08] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:09] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:09] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:11] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:11] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:11] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:13] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:13] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:13] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:15] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:15] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:15] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:17] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:17] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:19] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:19] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:19] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:21] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:21] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:21] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:23] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:23] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:23] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:26] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:26] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:26] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:29] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:29] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:29] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:32] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:32] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:32] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:33] "GET /proveedores/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:24:33] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:24:33] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:25:12] "POST /proveedores/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:25:13] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:25:13] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:25:13] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:25:57] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:25:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:25:57] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:25:59] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:26:00] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:26:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:26:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:26:05] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:26:05] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:26:05] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:39] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:39] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:39] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:41] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:41] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:41] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:43] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:43] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:43] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:45] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:49] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:49] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:49] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:53] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:53] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:56] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:56] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:56] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:59] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:27:59] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:27:59] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:00] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:16] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:16] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:16] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:19] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:19] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:19] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:43] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:43] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:43] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:45] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:46] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:46] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:46] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:49] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:49] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:49] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:51] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:52] "GET /categorias/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:28:52] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:28:52] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:09] "POST /categorias/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:29:10] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:10] "POST /categorias/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:29:11] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:11] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:11] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:15] "GET /categorias/1/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:15] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:15] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:18] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:18] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:18] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:33] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:33] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:33] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:37] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:37] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:37] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:39] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:29:40] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:29:40] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:14] "POST /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:30:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:26] "GET /productos/api/buscar?q=quintal HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:30:30] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:30:30] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:31] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:34] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:30:34] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:30:34] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:31:48] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:31:48] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:31:48] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:31:51] "GET /unidades/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:31:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:31:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:31:59] "POST /unidades/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:32:00] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:03] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:03] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:03] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:06] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:38] "POST /productos/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:32:39] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:39] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:39] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:48] "GET /productos/1/ajustar-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:48] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:48] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:57] "POST /productos/1/ajustar-stock HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:32:58] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:32:58] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:32:58] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:06] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:08] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:08] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:08] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:25] "POST /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:25] "GET /productos/api/buscar?q=arroz HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:25] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:25] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:49] "GET /productos/api/buscar?q=arr HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:50] "GET /productos/api/buscar?q=arroz HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:56] "POST /ventas/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:33:58] "GET /facturas/1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:33:58] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:33:58] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:11] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:11] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:11] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:14] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:17] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:17] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:20] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:20] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:20] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:27] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:27] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:32] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:32] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:32] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:40] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:40] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:40] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:44] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:34:44] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:34:44] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:01] "GET /reportes/bajo-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:01] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:01] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:18] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:18] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:18] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:21] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:21] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:21] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:24] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:24] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:24] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:28] "GET /reportes/cierre-dia HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:28] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:28] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:36] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:36] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:36] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:38] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:38] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:38] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:42] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:42] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:42] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:45] "GET /reportes/bajo-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:49] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:49] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:49] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:51] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:35:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:35:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:27] "GET /productos/api/buscar?q=ar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:28] "GET /productos/api/buscar?q=arrz HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:29] "GET /productos/api/buscar?q=arroz HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:30] "GET /productos/api/buscar?q=arro HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:37] "POST /ventas/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:36:38] "GET /facturas/2 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:38] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:38] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:45] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:51] "GET /clientes/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:54] "GET /cobros/cliente/1 HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:36:55] "GET /cobros/1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:36:55] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:36:55] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:00] "GET /cobros/1/abonar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:37:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:16] "POST /cobros/1/abonar HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:37:17] "GET /cobros/1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:37:17] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:27] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:37:27] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:27] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:30] "GET /pedidos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:37:30] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:37:30] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:38:01] "GET /productos/api/buscar?q=arroz HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:38:20] "POST /pedidos/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:38:21] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:38:21] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:38:21] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:38:30] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:38:30] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:38:30] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:41:50] "GET /pedidos/1/convertir-venta HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:41:52] "GET /ventas/nueva?pedido_id=1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:41:52] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:41:52] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:20] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:20] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:20] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:23] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:23] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:23] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:24] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:25] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:25] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:26] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:26] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:26] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:35] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:35] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:35] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:38] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:38] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:38] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:41] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:41] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:41] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:45] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:48] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:48] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:48] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:50] "GET /reportes/bajo-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:50] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:50] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:53] "GET /reportes/cierre-dia HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:44:53] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:44:53] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:02] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:03] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:03] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:08] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:08] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:08] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:10] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:10] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:10] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:15] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:15] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:15] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:29] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:29] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:29] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:35] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:35] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:35] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:37] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:37] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:45:37] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:45:37] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:18] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:30] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:50:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:32] "GET /static/css/custom.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:32] "GET /static/js/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:39] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:39] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:39] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:42] "GET /clientes/1/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:42] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:42] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:45] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:48] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:48] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:48] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:52] "GET /ventas/2/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:52] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:52] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:55] "POST /ventas/2/anular HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:50:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:50:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:50:57] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:00] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:05] "GET /ventas/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:05] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:05] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:08] "POST /ventas/1/anular HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:51:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:10] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:10] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:16] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:16] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:19] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:19] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:19] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:21] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:21] "GET /clientes/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:51:21] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:51:21] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:57:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:57:23] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:57:23] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:57:28] "GET /logout HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:57:28] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:57:31] "GET /clientes HTTP/1.1" 308 -
+127.0.0.1 - - [01/May/2026 19:57:31] "GET /clientes/ HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:57:31] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:57:53] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:58:20] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:58:58] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 19:59:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:59:00] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 19:59:00] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:00:22] "GET /logout HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:00:22] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:01:20] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:01:22] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:01:22] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:01:22] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:01:29] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:01:29] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:01:29] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:01:40] "GET /seguridad/usuarios/2/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:01:40] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:01:40] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:22:01] "GET /logout HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:22:01] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:24:10] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:24:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:24:12] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:12] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:34] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:24:34] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:34] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:42] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:24:42] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:42] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:46] "GET /unidades/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:24:46] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:24:46] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:13] "POST /unidades/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:25:14] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:25:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:17] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:25:17] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:21] "GET /categorias/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:25:21] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:21] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:54] "POST /categorias/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:25:55] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:25:55] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:25:55] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:26:02] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:26:02] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:26:02] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:26:07] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:26:07] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:26:07] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:44] "POST /productos/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:28:45] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:28:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:51] "GET /productos/1/ajustar-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:28:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:57] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:28:59] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:28:59] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:28:59] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:14] "GET /productos/2/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:29:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:20] "POST /productos/2/editar HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:29:21] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:29:22] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:22] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:44] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:29:44] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:44] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:46] "GET /proveedores/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:29:46] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:29:46] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:02] "POST /proveedores/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:34:04] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:34:04] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:04] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:09] "GET /proveedores/2/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:34:09] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:09] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:19] "POST /proveedores/2/editar HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:34:20] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:34:20] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:20] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:28] "GET /proveedores/2/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:34:28] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:28] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:35] "GET /proveedores/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:34:35] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:34:35] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:35:16] "GET /proveedores/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:35:16] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:35:16] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:39:43] "POST /proveedores/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:39:44] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:39:44] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:39:44] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:40:06] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:40:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:40:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:40:09] "GET /compras/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:40:09] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:40:09] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:41:12] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:41:12] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:41:12] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:41:17] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:41:17] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:41:17] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:42:52] "POST /productos/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:42:54] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:42:54] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:42:54] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:43:03] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:43:03] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:43:03] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:43:06] "GET /compras/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:43:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:43:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:44:29] "GET /productos/api/buscar?q=QQ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:44:30] "GET /productos/api/buscar?q=QQ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:45:38] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:45:38] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:38] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:40] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:45:40] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:40] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:45] "GET /unidades/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:45:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:54] "POST /unidades/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:45:55] "GET /unidades HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:45:55] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:45:55] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:01] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:01] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:01] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:06] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:07] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:08] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:08] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:08] "GET /categorias/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:09] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:09] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:18] "POST /categorias/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:46:19] "GET /categorias HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:20] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:20] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:22] "GET /proveedores/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:22] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:23] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:24] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:24] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:24] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:26] "GET /compras/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:46:26] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:46:26] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:02] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:05] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:13] "GET /productos/api/buscar?q=trans HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:17] "GET /productos/api/buscar?q=transpo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:21] "GET /compras/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:28] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:28] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:28] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:32] "GET /productos/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:32] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:32] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:49] "POST /productos/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:47:50] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:50] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:50] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:47:56] "GET /productos/api/buscar?q=tran HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:47:57] "GET /productos/api/buscar?q=trans HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:49:44] "POST /compras/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:49:45] "GET /compras/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:49:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:49:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:49:54] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:49:54] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:49:54] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:49:57] "GET /compras/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:49:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:49:57] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:08] "GET /compras/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:19] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:19] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:19] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:23] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:23] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:23] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:41] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:45] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:53] "GET /productos/2/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:50:53] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:50:53] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:51:01] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:51:28] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:51:28] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:51:28] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:51:31] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:51:31] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:51:31] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:51:39] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:51:53] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:52:37] "POST /ventas/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:52:39] "GET /facturas/3 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:52:39] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:52:39] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:52:56] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:52:56] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:52:56] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:08] "GET /facturas/?estado=EMITIDA HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:09] "GET /facturas/?estado=PAGADA HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:09] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:09] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:12] "GET /facturas/?estado= HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:12] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:12] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:22] "GET /facturas/3 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:22] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:22] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:34] "GET /facturas/?estado= HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:45] "GET /facturas/3 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:53:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:53:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:11] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:54:11] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:11] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:40] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:54:41] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:41] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:51] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:54:51] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:54:51] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:21] "POST /pedidos/1/estado HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:55:23] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:23] "POST /pedidos/1/estado HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:55:25] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:25] "POST /pedidos/1/estado HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:55:26] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:27] "POST /pedidos/1/estado HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:55:29] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:29] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:29] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:45] "POST /pedidos/1/estado HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:55:46] "GET /pedidos/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:46] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:46] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:49] "GET /pedidos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:49] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:49] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:56] "GET /pedidos/?estado=PENDIENTE HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:56] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:56] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:59] "GET /pedidos/?estado=CONFIRMADO HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:55:59] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:55:59] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:01] "GET /pedidos/?estado=EN_PROCESO HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:01] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:01] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:04] "GET /pedidos/?estado=ENTREGADO HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:04] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:04] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:07] "GET /pedidos/?estado=CANCELADO HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:07] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:07] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:10] "GET /pedidos/?estado=ENTREGADO HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:10] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:10] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:33] "GET /ventas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:33] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:33] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:36] "GET /ventas/nueva HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:56:36] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:36] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:56:56] "GET /productos/api/buscar?q=qq HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:12] "POST /ventas/nueva HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:57:13] "GET /facturas/4 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:13] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:13] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:25] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:25] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:25] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:31] "GET /clientes/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:31] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:31] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:39] "GET /cobros/cliente/1 HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:57:41] "GET /cobros/2 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:41] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:41] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:50] "GET /cobros/2/abonar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:57:50] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:57:50] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:12] "POST /cobros/2/abonar HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 20:58:14] "GET /cobros/2 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:58:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:32] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:58:32] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:32] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:41] "GET /cobros/2 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:58:44] "GET /clientes/1/detalle HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:58:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:55] "GET /reportes/deudas-clientes HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:58:55] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:58:55] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:22] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:59:22] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:22] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:27] "GET /productos/1/ajustar-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:59:27] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:27] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:29] "GET /productos/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:59:57] "GET /reportes/cierre-dia HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 20:59:57] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 20:59:57] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:02] "GET /reportes/cierre-dia?fecha=2026-05-01 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:02] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:02] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:10] "GET /reportes/cierre-dia?fecha=2026-05-02 HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\blueprints\reportes\routes.py", line 81, in cierre_dia
+    return render_template('reportes/cierre_dia.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\base.html", line 124, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 46, in block 'content'
+    <p class="text-3xl font-bold text-gray-900">${{ "%.2f"|format(ventas_contado.total + total_abonos) }}</p>
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+127.0.0.1 - - [01/May/2026 21:00:10] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:10] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:10] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=console.png&s=uQ9WE8dBzf1KzmpZSvh7 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:10] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:15] "GET /reportes/cierre-dia?fecha=2026-05-01 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:38] "GET /reportes/cierre-dia?fecha=2026-05-02 HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\blueprints\reportes\routes.py", line 81, in cierre_dia
+    return render_template('reportes/cierre_dia.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\base.html", line 124, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 46, in block 'content'
+    <p class="text-3xl font-bold text-gray-900">${{ "%.2f"|format(ventas_contado.total + total_abonos) }}</p>
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+127.0.0.1 - - [01/May/2026 21:00:38] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:38] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:39] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=console.png&s=uQ9WE8dBzf1KzmpZSvh7 HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:41] "GET /reportes/cierre-dia?fecha=2026-05-01 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:45] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:45] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:55] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:00:55] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:00:55] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:01] "GET /cobros/2/abonar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:01:01] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:01] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:07] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:01:14] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:01:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:18] "GET /seguridad/usuarios/nuevo HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:01:18] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:01:18] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:02:41] "POST /seguridad/usuarios/nuevo HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:02:42] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:02:42] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:02:42] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:03:06] "GET /seguridad/usuarios/3/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:03:06] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:03:06] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:03:10] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:03:16] "GET /logout HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:03:16] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:03:44] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:04:06] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:04:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:04:08] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:04:08] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:04:11] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:04:11] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:04:11] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:04:16] "GET /seguridad/usuarios/3/editar HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:04:16] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:04:16] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:05] "POST /seguridad/usuarios/3/editar HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:05:06] "GET /seguridad/usuarios HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:05:07] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:07] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:09] "GET /logout HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:05:09] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:05:28] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [01/May/2026 21:05:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:05:30] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:30] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:49] "GET /cobros/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:05:49] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:05:49] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:08] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:08] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:08] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:14] "GET /facturas/4 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:14] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:14] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:27] "GET /facturas/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:32] "GET /reportes/cierre-dia HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:33] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:33] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:38] "GET /reportes/cierre-dia?fecha=2026-05-02 HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\blueprints\reportes\routes.py", line 81, in cierre_dia
+    return render_template('reportes/cierre_dia.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\base.html", line 124, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 46, in block 'content'
+    <p class="text-3xl font-bold text-gray-900">${{ "%.2f"|format(ventas_contado.total + total_abonos) }}</p>
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+127.0.0.1 - - [01/May/2026 21:06:38] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:38] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:38] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=console.png&s=uQ9WE8dBzf1KzmpZSvh7 HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:41] "GET /reportes/cierre-dia HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:47] "GET /reportes/cierre-dia?fecha=2026-05-01 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:47] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:47] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:52] "GET /reportes/cierre-dia?fecha=2026-04-30 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:06:52] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:06:52] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:10] "GET /reportes/cierre-dia?fecha=2026-05-10 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:07:10] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:10] "GET /static/js/utils.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:17] "GET /reportes/cierre-dia?fecha=2026-05-02 HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\app\blueprints\reportes\routes.py", line 81, in cierre_dia
+    return render_template('reportes/cierre_dia.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\base.html", line 124, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion\templates\reportes\cierre_dia.html", line 46, in block 'content'
+    <p class="text-3xl font-bold text-gray-900">${{ "%.2f"|format(ventas_contado.total + total_abonos) }}</p>
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+127.0.0.1 - - [01/May/2026 21:07:17] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:17] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:17] "GET /reportes/cierre-dia?__debugger__=yes&cmd=resource&f=console.png&s=uQ9WE8dBzf1KzmpZSvh7 HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:21] "GET /reportes/cierre-dia?fecha=2026-05-10 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:07:27] "GET /reportes/bajo-stock HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 21:07:27] "GET /static/css/custom.css HTTP/1.1" 304 -
+127.0.0.1 - - [01/May/2026 21:07:27] "GET /static/js/utils.js HTTP/1.1" 304 -
+192.168.1.3 - - [01/May/2026 23:38:50] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:38:53] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:38:55] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:39:07] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:39:12] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:39:19] "POST /api/auth/register HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:39:25] "POST /api/auth/login HTTP/1.1" 404 -
+192.168.1.3 - - [01/May/2026 23:39:30] "POST /api/auth/register HTTP/1.1" 404 -

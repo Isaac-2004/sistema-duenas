@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: distribuidora-duenas
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn passenger_wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_HOST
+        value: db50371.public.databaseasp.net
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        value: db50371
+      - key: DB_NAME
+        value: db50371
+      - key: DB_PASSWORD
+        sync: false

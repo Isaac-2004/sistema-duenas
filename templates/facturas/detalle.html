@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Factura {{ factura.numero_factura }}{% endblock %}
+{% block content %}
+
+<!-- Barra de acciones (oculta al imprimir) -->
+<div class="no-print flex items-center gap-3 mb-5">
+  <a href="{{ url_for('facturas.lista') }}" class="text-gray-500 text-sm">← Facturas</a>
+  <button onclick="window.print()"
+          class="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+    🖨️ Imprimir
+  </button>
+  {% if cliente.celular %}
+    {% set msg = "Estimado/a " + cliente.nombres + ", su factura " + factura.numero_factura + " por $" + "%.2f"|format(factura.total) + " ha sido registrada. Gracias por su compra." %}
+    <a href="https://wa.me/593{{ cliente.celular|replace('0','',1) }}?text={{ msg|urlencode }}"
+       target="_blank"
+       class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+      📱 WhatsApp
+    </a>
+  {% endif %}
+</div>
+
+<!-- Contenido de la factura (visible en impresión) -->
+<div class="max-w-2xl mx-auto bg-white rounded-xl shadow-sm p-8" id="factura-content">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-start mb-8">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">{{ empresa.nombre }}</h1>
+      {% if empresa.ruc %}<p class="text-sm text-gray-600">RUC: {{ empresa.ruc }}</p>{% endif %}
+      {% if empresa.telefono %}<p class="text-sm text-gray-600">Tel: {{ empresa.telefono }}</p>{% endif %}
+      {% if empresa.direccion %}<p class="text-sm text-gray-600">{{ empresa.direccion }}</p>{% endif %}
+    </div>
+    <div class="text-right">
+      <p class="text-3xl font-bold text-gray-300">FACTURA</p>
+      <p class="text-xl font-bold text-gray-800 mt-1">{{ factura.numero_factura }}</p>
+      <p class="text-sm text-gray-500">Fecha: {{ factura.fecha_emision.strftime('%d/%m/%Y') }}</p>
+      {% if factura.fecha_vencimiento %}
+        <p class="text-sm text-orange-600">Vence: {{ factura.fecha_vencimiento.strftime('%d/%m/%Y') }}</p>
+      {% endif %}
+      <span class="inline-block mt-2 px-2 py-0.5 rounded text-xs font-medium
+        {% if factura.estado == 'PAGADA' %}bg-green-100 text-green-700
+        {% elif factura.estado == 'VENCIDA' %}bg-red-100 text-red-700
+        {% elif factura.estado == 'ANULADA' %}bg-gray-100 text-gray-600
+        {% else %}bg-blue-100 text-blue-700{% endif %}">
+        {{ factura.estado }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Datos del cliente -->
+  <div class="bg-gray-50 rounded-lg p-4 mb-6">
+    <p class="text-xs text-gray-500 uppercase font-medium mb-1">Facturar a:</p>
+    <p class="font-bold text-gray-900">{{ cliente.nombres }} {{ cliente.apellidos or '' }}{% if cliente.razon_social %} — {{ cliente.razon_social }}{% endif %}</p>
+    {% if cliente.cedula_ruc %}<p class="text-sm text-gray-600">Cédula/RUC: {{ cliente.cedula_ruc }}</p>{% endif %}
+    {% if cliente.celular %}<p class="text-sm text-gray-600">Cel: {{ cliente.celular }}</p>{% endif %}
+    {% if cliente.direccion %}<p class="text-sm text-gray-600">{{ cliente.direccion }}</p>{% endif %}
+  </div>
+
+  <!-- Tabla de productos -->
+  <table class="w-full text-sm mb-6">
+    <thead class="bg-gray-800 text-white">
+      <tr>
+        <th class="px-3 py-2 text-left">Descripción</th>
+        <th class="px-3 py-2 text-right">Cant.</th>
+        <th class="px-3 py-2 text-right">P. Unit.</th>
+        <th class="px-3 py-2 text-right">Subtotal</th>
+        <th class="px-3 py-2 text-right">IVA</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for l in lineas %}
+      <tr>
+        <td class="px-3 py-2">{{ l.producto }}</td>
+        <td class="px-3 py-2 text-right">{{ l.cantidad }}</td>
+        <td class="px-3 py-2 text-right">${{ "%.2f"|format(l.precio_unitario) }}</td>
+        <td class="px-3 py-2 text-right">${{ "%.2f"|format(l.subtotal) }}</td>
+        <td class="px-3 py-2 text-right text-xs">{% if l.aplica_iva %}${{ "%.2f"|format(l.valor_iva) }}{% else %}—{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Totales -->
+  <div class="flex justify-end mb-8">
+    <table class="text-sm">
+      <tr><td class="pr-8 py-1 text-gray-600">Subtotal sin IVA:</td><td class="text-right font-medium">${{ "%.2f"|format(factura.subtotal) }}</td></tr>
+      {% if factura.descuento > 0 %}
+      <tr><td class="pr-8 py-1 text-gray-600">Descuento:</td><td class="text-right text-red-600">-${{ "%.2f"|format(factura.descuento) }}</td></tr>
+      {% endif %}
+      <tr><td class="pr-8 py-1 text-gray-600">IVA ({{ (iva_rate * 100)|int }}%):</td><td class="text-right">${{ "%.2f"|format(factura.total_iva) }}</td></tr>
+      <tr class="border-t-2 border-gray-800">
+        <td class="pr-8 py-2 font-bold text-lg">TOTAL:</td>
+        <td class="text-right font-bold text-2xl text-green-700">${{ "%.2f"|format(factura.total) }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Información de cobro -->
+  {% if cxc and cxc.saldo_pendiente > 0 %}
+  <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+    <p class="text-sm font-semibold text-orange-800">💳 Saldo pendiente: ${{ "%.2f"|format(cxc.saldo_pendiente) }}</p>
+    <p class="text-xs text-orange-600 mt-0.5">Abonado: ${{ "%.2f"|format(cxc.monto_pagado) }}</p>
+  </div>
+  {% endif %}
+
+  <div class="text-center text-gray-400 text-xs border-t pt-4">
+    <p>¡Gracias por su preferencia!</p>
+    <p class="mt-1">{{ empresa.nombre }} — Sistema de Gestión</p>
+  </div>
+</div>
+{% endblock %}

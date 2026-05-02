@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Registrar Compra{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('compras.lista') }}" class="text-gray-500 hover:text-gray-700 text-sm">← Compras</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">Registrar Compra</h2>
+</div>
+
+<div class="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-4 text-sm text-blue-800">
+  📦 Al guardar la compra, el inventario se actualizará automáticamente.
+</div>
+
+<form method="POST" x-data="lineItems()" @submit.prevent="serializarItems() && $el.submit()">
+  <div id="items-hidden"></div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4 border-b pb-2">Datos de la Compra</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Proveedor *</label>
+        <select name="id_proveedor" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="">— Seleccionar —</option>
+          {% for p in proveedores %}
+            <option value="{{ p.id_proveedor }}">{{ p.razon_social }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Fecha de compra *</label>
+        <input name="fecha_compra" type="date" required
+               value="{{ now().strftime('%Y-%m-%d') }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">N° Factura del Proveedor</label>
+        <input name="numero_factura" placeholder="Ej: 001-001-000123456"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Notas</label>
+        <input name="notas"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+    <div class="flex items-center justify-between mb-4 border-b pb-2">
+      <h3 class="text-sm font-semibold text-gray-700">Productos Comprados</h3>
+      <button type="button" @click="addItem()"
+              class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg">+ Agregar</button>
+    </div>
+
+    <div x-show="items.length === 0" class="text-center py-6 text-gray-400 text-sm">
+      Haz clic en "Agregar" para añadir productos.
+    </div>
+
+    <div class="space-y-3">
+      <template x-for="(item, index) in items" :key="index">
+        <div class="border border-gray-200 rounded-lg p-3 bg-gray-50">
+          <div class="relative mb-2">
+            <input type="text" x-model="item.query"
+                   @input.debounce.350ms="buscarProducto(index)"
+                   placeholder="Buscar producto…"
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+            <div x-show="item.resultados.length > 0"
+                 class="absolute z-10 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+              <template x-for="prod in item.resultados" :key="prod.id_producto">
+                <button type="button" @click="seleccionarProducto(index, prod)"
+                        class="w-full text-left px-3 py-2 text-sm hover:bg-green-50 border-b border-gray-100 last:border-0">
+                  <span x-text="prod.nombre" class="font-medium"></span>
+                  <span class="text-gray-400 text-xs ml-2" x-text="'Costo: $' + parseFloat(prod.precio_venta).toFixed(2)"></span>
+                </button>
+              </template>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="text-xs text-gray-500">Cantidad</label>
+              <input type="number" x-model="item.cantidad" @input="updateSubtotal(index)"
+                     min="0.001" step="0.001"
+                     class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500">Precio de compra</label>
+              <input type="number" x-model="item.precio_unitario" @input="updateSubtotal(index)"
+                     min="0" step="0.01"
+                     class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500">Subtotal</label>
+              <p class="border border-gray-200 bg-white rounded px-2 py-1.5 text-sm font-medium"
+                 x-text="'$' + fmt(item.subtotal)"></p>
+            </div>
+          </div>
+          <button type="button" @click="removeItem(index)" class="mt-2 text-xs text-red-500">✕ Quitar</button>
+        </div>
+      </template>
+    </div>
+
+    <div x-show="items.length > 0" class="mt-4 border-t pt-3 text-right">
+      <p class="text-sm text-gray-600">Total compra: <span class="text-lg font-bold" x-text="'$' + fmt(subtotalSinIva)"></span></p>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-medium text-sm">Registrar Compra</button>
+    <a href="{{ url_for('compras.lista') }}" class="bg-gray-200 text-gray-700 px-6 py-2.5 rounded-lg text-sm">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

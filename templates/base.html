@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ nombre_empresa }}{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+  <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#16a34a', hover: '#15803d', light: '#dcfce7' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 min-h-screen" x-data="{ sidebarOpen: false }">
+
+  <!-- Overlay móvil -->
+  <div x-show="sidebarOpen" x-cloak
+       @click="sidebarOpen = false"
+       class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+         class="no-print fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-30 transform transition-transform duration-200 ease-in-out lg:translate-x-0 sidebar-scroll overflow-y-auto">
+    <div class="p-4 border-b border-gray-700">
+      <p class="text-xs text-gray-400 uppercase tracking-widest">Sistema de Gestión</p>
+      <h1 class="text-lg font-bold text-green-400 leading-tight">{{ nombre_empresa }}</h1>
+      {% if current_user %}
+      <div class="mt-2 flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+          {{ current_user.nombre[0].upper() if current_user.nombre else '?' }}
+        </div>
+        <div class="min-w-0">
+          <p class="text-xs font-medium text-white truncate">{{ current_user.nombre }}</p>
+          <p class="text-xs text-gray-400">{{ 'Administrador' if current_user.es_admin else 'Usuario' }}</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <nav class="p-3 space-y-1">
+      {% set nav = [
+        ('dashboard.index',           '🏠', 'Dashboard',       None),
+        ('pedidos.lista',             '📋', 'Pedidos',          None),
+        ('ventas.lista',              '💰', 'Ventas',           None),
+        ('compras.lista',             '🛒', 'Compras',          None),
+        ('facturas.lista',            '🧾', 'Facturas',         None),
+        ('cobros.lista',              '💳', 'Cobros / CxC',     None),
+        ('clientes.lista',            '👥', 'Clientes',         None),
+        ('proveedores.lista',         '🏭', 'Proveedores',      None),
+        ('productos.lista',           '📦', 'Productos',        None),
+        ('catalogos.categorias_lista','🏷️', 'Categorías',       None),
+        ('catalogos.unidades_lista',  '⚖️', 'Unidades',         None),
+        ('reportes.deudas_clientes',  '📊', 'Deudas (Rpt)',     None),
+        ('reportes.bajo_stock',       '📉', 'Bajo Stock (Rpt)', None),
+        ('reportes.cierre_dia',       '📅', 'Cierre del Día',   None),
+      ] %}
+      {% for endpoint, icon, label, _ in nav %}
+        {% set active = request.endpoint == endpoint %}
+        <a href="{{ url_for(endpoint) }}"
+           @click="sidebarOpen = false"
+           class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                  {{ 'bg-green-700 text-white' if active else 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+          <span>{{ icon }}</span>{{ label }}
+        </a>
+      {% endfor %}
+
+      {% if current_user and (current_user.es_admin or tiene_permiso('seguridad.ver_usuarios')) %}
+      <div class="border-t border-gray-700 mt-2 pt-2">
+        <p class="text-xs text-gray-500 uppercase tracking-widest px-3 mb-1">Admin</p>
+        <a href="{{ url_for('seguridad.usuarios_lista') }}"
+           @click="sidebarOpen = false"
+           class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                  {{ 'bg-green-700 text-white' if request.endpoint and request.endpoint.startswith('seguridad') else 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+          <span>🔐</span>Seguridad
+        </a>
+      </div>
+      {% endif %}
+    </nav>
+    <div class="p-3 border-t border-gray-700 mt-4">
+      <a href="{{ url_for('auth.logout') }}"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:bg-gray-700 hover:text-white">
+        <span>🚪</span> Cerrar Sesión
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <div class="lg:ml-64 min-h-screen flex flex-col">
+    <!-- Topbar móvil -->
+    <header class="no-print bg-white shadow-sm sticky top-0 z-10 flex items-center gap-3 px-4 py-3 lg:hidden">
+      <button @click="sidebarOpen = !sidebarOpen" class="text-gray-600 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <span class="font-semibold text-gray-800 text-sm">{{ nombre_empresa }}</span>
+    </header>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="px-4 pt-4 space-y-2">
+          {% for category, message in messages %}
+            {% set color = 'green' if category == 'success' else ('red' if category == 'danger' else 'yellow') %}
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-{{ color }}-100 border border-{{ color }}-300 text-{{ color }}-800 text-sm">
+              <span>{{ '✅' if category == 'success' else ('❌' if category == 'danger' else '⚠️') }}</span>
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Contenido de la página -->
+    <main class="flex-1 p-4 lg:p-6">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="no-print text-center text-xs text-gray-400 py-3">
+      {{ nombre_empresa }} &copy; {{ now().year if now is defined else 2025 }}
+    </footer>
+  </div>
+</body>
+</html>

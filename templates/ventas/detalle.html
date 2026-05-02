@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Venta {{ venta.numero_venta }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('ventas.lista') }}" class="text-gray-500 text-sm">← Ventas</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">{{ venta.numero_venta }}</h2>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+  <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-5">
+    <div class="flex justify-between items-start mb-4">
+      <div>
+        <p class="text-lg font-bold text-gray-900">{{ venta.cliente }}</p>
+        {% if venta.celular %}<p class="text-sm text-gray-500">{{ venta.celular }}</p>{% endif %}
+      </div>
+      <span class="px-3 py-1 rounded-full text-sm font-medium {{ 'bg-green-100 text-green-700' if venta.estado=='ACTIVA' else 'bg-red-100 text-red-700' }}">
+        {{ venta.estado }}
+      </span>
+    </div>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      <div><span class="text-gray-500">Fecha:</span> {{ venta.fecha_venta.strftime('%d/%m/%Y %H:%M') }}</div>
+      <div><span class="text-gray-500">Tipo:</span>
+        <span class="{{ 'text-blue-700' if venta.tipo_venta=='CONTADO' else 'text-orange-600' }} font-medium">{{ venta.tipo_venta }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5">
+    <p class="text-3xl font-bold text-gray-800">${{ "%.2f"|format(venta.total) }}</p>
+    <p class="text-xs text-gray-500 mt-1">Total de la venta</p>
+    <div class="mt-4 space-y-2">
+      {% if factura %}
+        <a href="{{ url_for('facturas.detalle', id=factura.id_factura) }}"
+           class="block text-center bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 rounded-lg font-medium">
+          🧾 Ver Factura {{ factura.numero_factura }}
+        </a>
+      {% endif %}
+      {% if venta.estado == 'ACTIVA' %}
+        <form method="POST" action="{{ url_for('ventas.anular', id=venta.id_venta) }}"
+              onsubmit="return confirm('¿Seguro que desea anular esta venta? El stock será revertido.')">
+          <button type="submit" class="w-full text-center bg-red-100 hover:bg-red-200 text-red-700 text-sm py-2 rounded-lg">
+            Anular Venta
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-4">
+  <h3 class="font-semibold text-gray-700 mb-3">Detalle de Productos</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+        <tr>
+          <th class="px-3 py-2 text-left">Producto</th>
+          <th class="px-3 py-2 text-right">Cant.</th>
+          <th class="px-3 py-2 text-right">Precio</th>
+          <th class="px-3 py-2 text-right">Subtotal</th>
+          <th class="px-3 py-2 text-right">IVA</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for d in detalle %}
+        <tr>
+          <td class="px-3 py-2 font-medium">{{ d.producto }}</td>
+          <td class="px-3 py-2 text-right">{{ d.cantidad }}</td>
+          <td class="px-3 py-2 text-right">${{ "%.2f"|format(d.precio_unitario) }}</td>
+          <td class="px-3 py-2 text-right">${{ "%.2f"|format(d.subtotal) }}</td>
+          <td class="px-3 py-2 text-right text-xs text-orange-600">
+            {% if d.aplica_iva %}${{ "%.2f"|format(d.valor_iva) }}{% else %}—{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot class="border-t-2 border-gray-200">
+        <tr><td colspan="3" class="px-3 py-2 text-right text-gray-600">Subtotal:</td><td colspan="2" class="px-3 py-2 text-right">${{ "%.2f"|format(venta.subtotal) }}</td></tr>
+        {% if venta.descuento > 0 %}
+        <tr><td colspan="3" class="px-3 py-2 text-right text-gray-600">Descuento:</td><td colspan="2" class="px-3 py-2 text-right text-red-600">-${{ "%.2f"|format(venta.descuento) }}</td></tr>
+        {% endif %}
+        <tr><td colspan="3" class="px-3 py-2 text-right text-gray-600">IVA:</td><td colspan="2" class="px-3 py-2 text-right">${{ "%.2f"|format(venta.total_iva) }}</td></tr>
+        <tr><td colspan="3" class="px-3 py-2 text-right font-bold text-gray-800">TOTAL:</td><td colspan="2" class="px-3 py-2 text-right font-bold text-lg">${{ "%.2f"|format(venta.total) }}</td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+{% endblock %}

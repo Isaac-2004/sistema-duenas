@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Cobros y Cuentas por Cobrar{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Cobros / Cuentas por Cobrar</h2>
+  <div class="bg-orange-100 border border-orange-300 rounded-lg px-4 py-2 text-right">
+    <p class="text-xs text-orange-600">Total pendiente</p>
+    <p class="text-xl font-bold text-orange-700">${{ "%.2f"|format(total_pendiente) }}</p>
+  </div>
+</div>
+
+{% if not cuentas %}
+  <div class="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+    <p class="text-4xl mb-3">✅</p>
+    <p class="text-green-700 font-semibold">No hay cuentas pendientes de cobro.</p>
+  </div>
+{% else %}
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-3 text-left">Cliente</th>
+          <th class="px-4 py-3 text-left hidden sm:table-cell">Venta</th>
+          <th class="px-4 py-3 text-right">Total</th>
+          <th class="px-4 py-3 text-right">Abonado</th>
+          <th class="px-4 py-3 text-right">Saldo</th>
+          <th class="px-4 py-3 text-left hidden md:table-cell">Vencimiento</th>
+          <th class="px-4 py-3 text-center">Estado</th>
+          <th class="px-4 py-3 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for cta in cuentas %}
+        {% set vencida = cta.fecha_vencimiento < now().date() and cta.estado != 'PAGADA' %}
+        <tr class="hover:bg-gray-50 {{ 'bg-red-50' if vencida else '' }}">
+          <td class="px-4 py-3">
+            <p class="font-medium text-gray-900">{{ cta.cliente }}</p>
+            {% if cta.celular %}
+              <a href="https://wa.me/593{{ cta.celular|replace('0','',1) }}" target="_blank"
+                 class="text-xs text-green-600">📱 {{ cta.celular }}</a>
+            {% endif %}
+          </td>
+          <td class="px-4 py-3 font-mono text-xs text-gray-600 hidden sm:table-cell">{{ cta.numero_venta }}</td>
+          <td class="px-4 py-3 text-right text-gray-700">${{ "%.2f"|format(cta.monto_total) }}</td>
+          <td class="px-4 py-3 text-right text-green-700">${{ "%.2f"|format(cta.monto_pagado) }}</td>
+          <td class="px-4 py-3 text-right font-bold {{ 'text-red-600' if vencida else 'text-orange-600' }}">
+            ${{ "%.2f"|format(cta.saldo_pendiente) }}
+          </td>
+          <td class="px-4 py-3 hidden md:table-cell {{ 'text-red-600 font-medium' if vencida else 'text-gray-600' }}">
+            {{ cta.fecha_vencimiento.strftime('%d/%m/%Y') }}
+            {% if vencida %}<span class="text-xs block">⚠️ VENCIDA</span>{% endif %}
+          </td>
+          <td class="px-4 py-3 text-center">
+            {% set col = {'PENDIENTE':'yellow','PAGADA_PARCIAL':'orange','VENCIDA':'red'} %}
+            {% set c = col.get(cta.estado, 'gray') %}
+            <span class="px-2 py-0.5 rounded-full text-xs bg-{{ c }}-100 text-{{ c }}-700">
+              {{ cta.estado.replace('_',' ') }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ url_for('cobros.abonar', id_cuenta=cta.id_cuenta) }}"
+               class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium">
+              + Abonar
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Compra #{{ compra.id_compra }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('compras.lista') }}" class="text-gray-500 text-sm">← Compras</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">Compra #{{ compra.id_compra }}</h2>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+  <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-5">
+    <h3 class="font-semibold text-gray-700 mb-3">Información</h3>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      <div><span class="text-gray-500">Proveedor:</span> <span class="font-medium">{{ compra.proveedor }}</span></div>
+      <div><span class="text-gray-500">Fecha:</span> {{ compra.fecha_compra.strftime('%d/%m/%Y') }}</div>
+      <div><span class="text-gray-500">Factura prov.:</span> {{ compra.numero_factura or '—' }}</div>
+      <div><span class="text-gray-500">Estado:</span> <span class="font-medium">{{ compra.estado }}</span></div>
+    </div>
+    {% if compra.notas %}<p class="mt-3 text-xs text-gray-500 bg-gray-50 rounded p-2">{{ compra.notas }}</p>{% endif %}
+  </div>
+  <div class="bg-white rounded-xl shadow-sm p-5 text-center">
+    <p class="text-gray-500 text-sm">Total compra</p>
+    <p class="text-3xl font-bold text-gray-800 mt-1">${{ "%.2f"|format(compra.total) }}</p>
+  </div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-4">
+  <h3 class="font-semibold text-gray-700 mb-3">Productos Recibidos</h3>
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+      <tr>
+        <th class="px-3 py-2 text-left">Producto</th>
+        <th class="px-3 py-2 text-right">Cantidad</th>
+        <th class="px-3 py-2 text-right">Precio Unit.</th>
+        <th class="px-3 py-2 text-right">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for d in detalle %}
+      <tr>
+        <td class="px-3 py-2"><p class="font-medium">{{ d.producto }}</p><p class="text-xs text-gray-400">{{ d.codigo }}</p></td>
+        <td class="px-3 py-2 text-right">{{ d.cantidad }}</td>
+        <td class="px-3 py-2 text-right">${{ "%.2f"|format(d.precio_unitario) }}</td>
+        <td class="px-3 py-2 text-right font-medium">${{ "%.2f"|format(d.subtotal) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

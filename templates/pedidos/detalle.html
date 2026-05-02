@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}Pedido #{{ pedido.id_pedido }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('pedidos.lista') }}" class="text-gray-500 hover:text-gray-700 text-sm">← Pedidos</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">Pedido #{{ pedido.id_pedido }}</h2>
+</div>
+
+{% set colores = {'PENDIENTE':'yellow','CONFIRMADO':'blue','EN_PROCESO':'purple','ENTREGADO':'green','CANCELADO':'red'} %}
+{% set c = colores.get(pedido.estado, 'gray') %}
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+  <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-5">
+    <div class="flex justify-between items-start mb-4">
+      <div>
+        <p class="text-lg font-bold text-gray-900">{{ pedido.cliente }}</p>
+        {% if pedido.celular %}
+          <a href="https://wa.me/593{{ pedido.celular|replace('0','',1) }}" target="_blank"
+             class="text-sm text-green-600 hover:underline">📱 {{ pedido.celular }}</a>
+        {% endif %}
+      </div>
+      <span class="px-3 py-1 rounded-full text-sm font-medium bg-{{ c }}-100 text-{{ c }}-700">
+        {{ pedido.estado.replace('_',' ') }}
+      </span>
+    </div>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      <div><span class="text-gray-500">Fecha pedido:</span> {{ pedido.fecha_pedido.strftime('%d/%m/%Y %H:%M') }}</div>
+      <div><span class="text-gray-500">Canal:</span> {{ pedido.canal_origen or 'WHATSAPP' }}</div>
+      {% if pedido.fecha_entrega %}
+        <div><span class="text-gray-500">Fecha entrega:</span> {{ pedido.fecha_entrega.strftime('%d/%m/%Y') }}</div>
+      {% endif %}
+    </div>
+    {% if pedido.notas %}
+      <p class="mt-3 text-xs text-gray-500 bg-gray-50 rounded p-2">📝 {{ pedido.notas }}</p>
+    {% endif %}
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5 space-y-2">
+    <h3 class="font-semibold text-gray-700 mb-3">Acciones</h3>
+    {% if pedido.estado not in ('ENTREGADO', 'CANCELADO') %}
+      <a href="{{ url_for('pedidos.convertir_venta', id=pedido.id_pedido) }}"
+         class="block text-center bg-green-600 hover:bg-green-700 text-white text-sm py-2.5 rounded-lg font-medium">
+        💰 Convertir en Venta
+      </a>
+    {% endif %}
+    {% if pedido.celular %}
+      <a href="https://wa.me/593{{ pedido.celular|replace('0','',1) }}" target="_blank"
+         class="block text-center bg-green-100 hover:bg-green-200 text-green-800 text-sm py-2 rounded-lg">
+        📱 Abrir WhatsApp
+      </a>
+    {% endif %}
+
+    <!-- Cambiar estado -->
+    <form method="POST" action="{{ url_for('pedidos.cambiar_estado', id=pedido.id_pedido) }}" class="pt-2">
+      <label class="block text-xs font-medium text-gray-600 mb-1">Cambiar estado:</label>
+      <div class="flex gap-2">
+        <select name="estado" class="flex-1 border border-gray-300 rounded-lg px-2 py-1.5 text-sm">
+          {% for opt in ['PENDIENTE','CONFIRMADO','EN_PROCESO','ENTREGADO','CANCELADO'] %}
+            <option value="{{ opt }}" {{ 'selected' if opt == pedido.estado }}>{{ opt.replace('_',' ') }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="bg-gray-700 text-white px-3 rounded-lg text-sm">OK</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Detalle de productos -->
+<div class="bg-white rounded-xl shadow-sm p-4">
+  <h3 class="font-semibold text-gray-700 mb-3">Productos</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+        <tr>
+          <th class="px-3 py-2 text-left">Producto</th>
+          <th class="px-3 py-2 text-right">Cantidad</th>
+          <th class="px-3 py-2 text-right">Precio Unit.</th>
+          <th class="px-3 py-2 text-right">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% set total = namespace(val=0) %}
+        {% for d in detalle %}
+          {% set total.val = total.val + d.subtotal %}
+          <tr>
+            <td class="px-3 py-2">
+              <p class="font-medium">{{ d.producto }}</p>
+              <p class="text-xs text-gray-400">{{ d.codigo }}</p>
+            </td>
+            <td class="px-3 py-2 text-right">{{ d.cantidad }}</td>
+            <td class="px-3 py-2 text-right">${{ "%.2f"|format(d.precio_unitario) }}</td>
+            <td class="px-3 py-2 text-right font-medium">${{ "%.2f"|format(d.subtotal) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr class="border-t-2 border-gray-200">
+          <td colspan="3" class="px-3 py-2 text-right font-semibold text-gray-700">Total estimado:</td>
+          <td class="px-3 py-2 text-right text-lg font-bold text-green-700">${{ "%.2f"|format(total.val) }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Clientes</h2>
+  <a href="{{ url_for('clientes.nuevo') }}"
+     class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg text-center">
+    + Nuevo Cliente
+  </a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+  <form method="GET" class="flex flex-wrap gap-2">
+    <input name="q" value="{{ q }}" placeholder="Buscar por nombre o cédula…"
+           class="flex-1 min-w-0 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+    <select name="estado" class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+      <option value="1" {{ 'selected' if estado=='1' }}>Activos</option>
+      <option value="0" {{ 'selected' if estado=='0' }}>Inactivos</option>
+      <option value=""  {{ 'selected' if estado=='' }}>Todos</option>
+    </select>
+    <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm">Buscar</button>
+  </form>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-3 text-left">Nombre / Razón Social</th>
+          <th class="px-4 py-3 text-left hidden sm:table-cell">Cédula/RUC</th>
+          <th class="px-4 py-3 text-left hidden md:table-cell">Celular</th>
+          <th class="px-4 py-3 text-right hidden lg:table-cell">Límite Crédito</th>
+          <th class="px-4 py-3 text-center">Estado</th>
+          <th class="px-4 py-3 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for c in clientes %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3 font-medium text-gray-900">
+            {{ c.nombres }} {{ c.apellidos or '' }}
+            {% if c.razon_social %}<br><span class="text-xs text-gray-500">{{ c.razon_social }}</span>{% endif %}
+          </td>
+          <td class="px-4 py-3 text-gray-600 hidden sm:table-cell">{{ c.cedula_ruc or '—' }}</td>
+          <td class="px-4 py-3 text-gray-600 hidden md:table-cell">{{ c.celular or '—' }}</td>
+          <td class="px-4 py-3 text-right text-gray-600 hidden lg:table-cell">${{ "%.2f"|format(c.limite_credito) }}</td>
+          <td class="px-4 py-3 text-center">
+            <span class="px-2 py-0.5 rounded-full text-xs {{ 'bg-green-100 text-green-700' if c.estado else 'bg-red-100 text-red-700' }}">
+              {{ 'Activo' if c.estado else 'Inactivo' }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ url_for('clientes.detalle', id=c.id_cliente) }}" class="text-blue-600 hover:underline text-xs mr-2">Ver</a>
+            <a href="{{ url_for('clientes.editar', id=c.id_cliente) }}" class="text-gray-600 hover:underline text-xs">Editar</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="px-4 py-8 text-center text-gray-400">No se encontraron clientes.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

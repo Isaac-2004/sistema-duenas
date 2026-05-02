@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Proveedores{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Proveedores</h2>
+  <a href="{{ url_for('proveedores.nuevo') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg">+ Nuevo</a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+  <form method="GET" class="flex gap-2">
+    <input name="q" value="{{ q }}" placeholder="Buscar proveedor…"
+           class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+    <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm">Buscar</button>
+  </form>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+      <tr>
+        <th class="px-4 py-3 text-left">Proveedor</th>
+        <th class="px-4 py-3 text-left hidden sm:table-cell">Contacto</th>
+        <th class="px-4 py-3 text-left hidden md:table-cell">Ciudad</th>
+        <th class="px-4 py-3 text-center">Estado</th>
+        <th class="px-4 py-3 text-right">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for p in proveedores %}
+      <tr class="hover:bg-gray-50">
+        <td class="px-4 py-3 font-medium text-gray-900">{{ p.razon_social }}</td>
+        <td class="px-4 py-3 text-gray-600 hidden sm:table-cell">{{ p.nombre_contacto or '—' }}<br><span class="text-xs">{{ p.celular or '' }}</span></td>
+        <td class="px-4 py-3 text-gray-600 hidden md:table-cell">{{ p.ciudad or '—' }}</td>
+        <td class="px-4 py-3 text-center">
+          <span class="px-2 py-0.5 rounded-full text-xs {{ 'bg-green-100 text-green-700' if p.estado else 'bg-red-100 text-red-700' }}">
+            {{ 'Activo' if p.estado else 'Inactivo' }}
+          </span>
+        </td>
+        <td class="px-4 py-3 text-right">
+          <a href="{{ url_for('proveedores.editar', id=p.id_proveedor) }}" class="text-gray-600 hover:underline text-xs">Editar</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">No se encontraron proveedores.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

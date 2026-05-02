@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — {{ nombre_empresa }}{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Dashboard</h2>
+  <div class="bg-white rounded-xl shadow-sm px-4 py-2 text-right border border-gray-100">
+    <p id="reloj-hora" class="text-2xl font-bold text-gray-800 tabular-nums leading-none"></p>
+    <p id="reloj-fecha" class="text-xs text-gray-400 mt-0.5"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  const DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const MESES = ['enero','febrero','marzo','abril','mayo','junio',
+                 'julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  function tick() {
+    const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'America/Guayaquil'}));
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('reloj-hora').textContent = h + ':' + m + ':' + s;
+    document.getElementById('reloj-fecha').textContent =
+      DIAS[now.getDay()] + ', ' + now.getDate() + ' de ' + MESES[now.getMonth()];
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<!-- Tarjetas de métricas -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+  <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-green-500">
+    <p class="text-xs text-gray-500 uppercase tracking-wide">Ventas hoy</p>
+    <p class="text-2xl font-bold text-gray-800 mt-1">${{ "%.2f"|format(ventas_hoy) }}</p>
+  </div>
+  <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-blue-500">
+    <p class="text-xs text-gray-500 uppercase tracking-wide">Pedidos activos</p>
+    <p class="text-2xl font-bold text-gray-800 mt-1">{{ pedidos_pendientes }}</p>
+  </div>
+  <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 {{ 'border-red-500' if bajo_stock > 0 else 'border-gray-300' }}">
+    <p class="text-xs text-gray-500 uppercase tracking-wide">Bajo stock</p>
+    <p class="text-2xl font-bold {{ 'text-red-600' if bajo_stock > 0 else 'text-gray-800' }} mt-1">{{ bajo_stock }}</p>
+  </div>
+  <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 {{ 'border-orange-500' if vencidas > 0 else 'border-yellow-400' }}">
+    <p class="text-xs text-gray-500 uppercase tracking-wide">Por cobrar</p>
+    <p class="text-2xl font-bold text-gray-800 mt-1">${{ "%.2f"|format(por_cobrar) }}</p>
+    {% if vencidas > 0 %}
+      <p class="text-xs text-red-600 mt-1">⚠️ {{ vencidas }} vencida{{ 's' if vencidas != 1 }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Acciones rápidas -->
+<div class="bg-white rounded-xl shadow-sm p-4 mb-6">
+  <h3 class="text-sm font-semibold text-gray-700 mb-3">Acciones rápidas</h3>
+  <div class="flex flex-wrap gap-2">
+    <a href="{{ url_for('pedidos.nuevo') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+      + Nuevo Pedido
+    </a>
+    <a href="{{ url_for('ventas.nueva') }}" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+      + Nueva Venta
+    </a>
+    <a href="{{ url_for('compras.nueva') }}" class="bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+      + Registrar Compra
+    </a>
+    <a href="{{ url_for('cobros.lista') }}" class="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded-lg font-medium">
+      💳 Ver Cobros
+    </a>
+    {% if bajo_stock > 0 %}
+      <a href="{{ url_for('reportes.bajo_stock') }}" class="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
+        📦 Ver bajo stock
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Últimos pedidos -->
+<div class="bg-white rounded-xl shadow-sm p-4">
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-sm font-semibold text-gray-700">Últimos pedidos</h3>
+    <a href="{{ url_for('pedidos.lista') }}" class="text-xs text-green-600 hover:underline">Ver todos →</a>
+  </div>
+  {% if ultimos_pedidos %}
+    <div class="space-y-2">
+      {% for p in ultimos_pedidos %}
+        {% set colores = {'PENDIENTE': 'yellow', 'CONFIRMADO': 'blue', 'EN_PROCESO': 'purple', 'ENTREGADO': 'green', 'CANCELADO': 'red'} %}
+        {% set c = colores.get(p.estado, 'gray') %}
+        <div class="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+          <div>
+            <p class="text-sm font-medium text-gray-800">{{ p.cliente }}</p>
+            <p class="text-xs text-gray-400">{{ p.fecha_pedido.strftime('%d/%m/%Y %H:%M') }}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-{{ c }}-100 text-{{ c }}-700">
+              {{ p.estado }}
+            </span>
+            <a href="{{ url_for('pedidos.detalle', id=p.id_pedido) }}" class="text-gray-400 hover:text-gray-600 text-sm">→</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-sm text-gray-400 text-center py-4">No hay pedidos recientes.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+/* Ocultar barra lateral y nav al imprimir facturas */
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  body { background: white !important; }
+}
+
+/* Asegurar que Alpine.js no muestre flashes antes de inicializar */
+[x-cloak] { display: none !important; }
+
+/* Scrollbar más delgado en sidebar */
+.sidebar-scroll::-webkit-scrollbar { width: 4px; }
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 2px; }

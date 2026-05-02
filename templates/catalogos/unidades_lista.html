@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Unidades de Medida{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Unidades de Medida</h2>
+  <a href="{{ url_for('catalogos.unidades_nueva') }}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg">+ Nueva</a>
+</div>
+<div class="bg-white rounded-xl shadow-sm overflow-hidden max-w-md">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+      <tr>
+        <th class="px-4 py-3 text-left">Nombre</th>
+        <th class="px-4 py-3 text-left">Abreviatura</th>
+        <th class="px-4 py-3 text-right">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for u in unidades %}
+      <tr class="hover:bg-gray-50">
+        <td class="px-4 py-3 font-medium">{{ u.nombre }}</td>
+        <td class="px-4 py-3 text-gray-600">{{ u.abreviatura }}</td>
+        <td class="px-4 py-3 text-right">
+          <a href="{{ url_for('catalogos.unidades_editar', id=u.id_unidad) }}" class="text-gray-600 hover:underline text-xs">Editar</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3" class="px-4 py-8 text-center text-gray-400">No hay unidades.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

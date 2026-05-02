@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('clientes.lista') }}" class="text-gray-500 hover:text-gray-700 text-sm">← Clientes</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">{{ titulo }}</h2>
+</div>
+
+<form method="POST" class="max-w-2xl space-y-5">
+  <div class="bg-white rounded-xl shadow-sm p-5">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4 border-b pb-2">Información General</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Tipo de Cliente</label>
+        <select name="tipo_cliente" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="NATURAL" {{ 'selected' if not cliente or cliente.tipo_cliente=='NATURAL' }}>Persona Natural</option>
+          <option value="JURIDICA" {{ 'selected' if cliente and cliente.tipo_cliente=='JURIDICA' }}>Persona Jurídica</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Estado</label>
+        <select name="estado" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="1" {{ 'selected' if not cliente or cliente.estado }}>Activo</option>
+          <option value="0" {{ 'selected' if cliente and not cliente.estado }}>Inactivo</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Nombres *</label>
+        <input name="nombres" required value="{{ cliente.nombres if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Apellidos</label>
+        <input name="apellidos" value="{{ cliente.apellidos if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Razón Social (si es jurídica)</label>
+        <input name="razon_social" value="{{ cliente.razon_social if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Cédula / RUC</label>
+        <input name="cedula_ruc" value="{{ cliente.cedula_ruc if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Límite de Crédito ($)</label>
+        <input name="limite_credito" type="number" step="0.01" min="0"
+               value="{{ cliente.limite_credito if cliente else '0' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm p-5">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4 border-b pb-2">Contacto</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Teléfono</label>
+        <input name="telefono" value="{{ cliente.telefono if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Celular</label>
+        <input name="celular" value="{{ cliente.celular if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Email</label>
+        <input name="email" type="email" value="{{ cliente.email if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Ciudad</label>
+        <input name="ciudad" value="{{ cliente.ciudad if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Dirección</label>
+        <input name="direccion" value="{{ cliente.direccion if cliente else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Notas</label>
+        <textarea name="notas" rows="2"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">{{ cliente.notas if cliente else '' }}</textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-medium text-sm">
+      Guardar
+    </button>
+    <a href="{{ url_for('clientes.lista') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-lg text-sm">
+      Cancelar
+    </a>
+  </div>
+</form>
+{% endblock %}

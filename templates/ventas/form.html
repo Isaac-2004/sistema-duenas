@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %}Nueva Venta{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('ventas.lista') }}" class="text-gray-500 text-sm">← Ventas</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">
+    {% if pedido %}Pedido #{{ pedido.id_pedido }} → Venta{% else %}Nueva Venta{% endif %}
+  </h2>
+</div>
+
+<form method="POST"
+      x-data="lineItems({{ pedido_items | tojson if pedido_items else '[]' }})"
+      @submit.prevent="serializarItems() && $el.submit()">
+
+  <div id="items-hidden"></div>
+  {% if pedido_id %}<input type="hidden" name="pedido_id" value="{{ pedido_id }}">{% endif %}
+
+  <!-- Datos generales -->
+  <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4 border-b pb-2">Datos de la Venta</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <!-- Cliente -->
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Cliente *</label>
+        <select name="id_cliente" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="">— Seleccionar —</option>
+          {% for c in clientes %}
+            <option value="{{ c.id_cliente }}"
+                    {{ 'selected' if pedido and pedido.id_cliente == c.id_cliente }}>
+              {{ c.nombres }} {{ c.apellidos or '' }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Tipo de venta con panel crédito -->
+      <div x-data="{ tipo: 'CONTADO' }">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Tipo de venta *</label>
+        <select name="tipo_venta" x-model="tipo"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="CONTADO">💵 Al Contado</option>
+          <option value="CREDITO">📅 A Crédito</option>
+        </select>
+        <div x-show="tipo === 'CREDITO'" x-cloak class="mt-2">
+          <label class="block text-xs font-medium text-gray-600 mb-1">Fecha de vencimiento *</label>
+          <input name="fecha_vencimiento" type="date"
+                 :required="tipo === 'CREDITO'"
+                 class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+        </div>
+      </div>
+
+      <!-- Descuento -->
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Descuento ($)</label>
+        <input name="descuento" type="number" step="0.01" min="0" value="0"
+               x-model="descuento"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <!-- Notas -->
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Notas</label>
+        <input name="notas"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+    </div>
+  </div>
+
+  <!-- Líneas de productos -->
+  <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+    <div class="flex items-center justify-between mb-4 border-b pb-2">
+      <h3 class="text-sm font-semibold text-gray-700">Productos</h3>
+      <button type="button" @click="addItem()"
+              class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg">+ Agregar</button>
+    </div>
+
+    {% if pedido_items %}
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-3 text-xs text-yellow-800">
+        ⚡ Productos pre-cargados desde el pedido. Puedes modificar cantidades y precios.
+      </div>
+    {% endif %}
+
+    <div x-show="items.length === 0" class="text-center py-6 text-gray-400 text-sm">
+      Haz clic en "Agregar" para añadir productos.
+    </div>
+
+    <div class="space-y-3">
+      <template x-for="(item, index) in items" :key="index">
+        <div class="border border-gray-200 rounded-lg p-3 bg-gray-50">
+          <!-- Búsqueda -->
+          <div class="relative mb-2">
+            <input type="text" x-model="item.query"
+                   @input.debounce.350ms="buscarProducto(index)"
+                   placeholder="Buscar producto por nombre o código…"
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+            <div x-show="item.resultados && item.resultados.length > 0"
+                 class="absolute z-10 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+              <template x-for="prod in item.resultados" :key="prod.id_producto">
+                <button type="button" @click="seleccionarProducto(index, prod)"
+                        class="w-full text-left px-3 py-2 text-sm hover:bg-green-50 border-b border-gray-100 last:border-0">
+                  <span x-text="prod.nombre" class="font-medium"></span>
+                  <span class="text-gray-400 text-xs ml-2" x-text="'$' + parseFloat(prod.precio_venta).toFixed(2)"></span>
+                  <span :class="prod.stock_actual <= 0 ? 'text-red-500' : 'text-gray-400'"
+                        class="text-xs ml-2" x-text="'Stock: ' + prod.stock_actual"></span>
+                </button>
+              </template>
+            </div>
+          </div>
+          <!-- Campos numéricos -->
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="text-xs text-gray-500">Cantidad</label>
+              <input type="number" x-model="item.cantidad" @input="updateSubtotal(index)"
+                     min="0.001" step="0.001"
+                     class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500">Precio venta</label>
+              <input type="number" x-model="item.precio_unitario" @input="updateSubtotal(index)"
+                     min="0" step="0.01"
+                     class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500">Subtotal</label>
+              <p class="border border-gray-200 bg-white rounded px-2 py-1.5 text-sm font-medium text-green-700"
+                 x-text="'$' + fmt(item.subtotal)"></p>
+            </div>
+          </div>
+          <div class="mt-1 flex justify-between items-center">
+            <span x-show="item.aplica_iva" class="text-xs text-orange-500">
+              + IVA {{ (iva_rate * 100)|int }}%
+            </span>
+            <span x-show="!item.aplica_iva" class="text-xs text-gray-400">Sin IVA</span>
+            <button type="button" @click="removeItem(index)" class="text-xs text-red-500 hover:text-red-700">✕ Quitar</button>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Totales -->
+    <div x-show="items.length > 0" class="mt-4 border-t pt-4 space-y-1.5">
+      <div class="flex justify-between text-sm text-gray-600">
+        <span>Subtotal:</span><span x-text="'$' + fmt(subtotalSinIva)"></span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-600">
+        <span>Descuento:</span><span x-text="'- $' + fmt(descuento)"></span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-600">
+        <span>IVA ({{ (iva_rate * 100)|int }}%):</span><span x-text="'$' + fmt(totalIva)"></span>
+      </div>
+      <div class="flex justify-between text-base font-bold text-gray-900 border-t pt-2">
+        <span>TOTAL:</span><span class="text-green-700" x-text="'$' + fmt(totalFinal)"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold text-sm">
+      💰 Registrar Venta y Generar Factura
+    </button>
+    <a href="{{ url_for('ventas.lista') }}" class="bg-gray-200 text-gray-700 px-6 py-2.5 rounded-lg text-sm">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if usuario else 'Nuevo' }} Usuario{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('seguridad.usuarios_lista') }}" class="text-gray-500 text-sm">← Seguridad</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">
+    {{ 'Editar usuario: ' + usuario.username if usuario else 'Nuevo usuario' }}
+  </h2>
+</div>
+
+<form method="POST"
+      action="{{ url_for('seguridad.usuario_editar', id=usuario.id_usuario) if usuario else url_for('seguridad.usuario_nuevo') }}">
+  <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4 border-b pb-2">Datos del usuario</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Nombre completo *</label>
+        <input name="nombre_completo" required
+               value="{{ usuario.nombre_completo if usuario else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Nombre de usuario *</label>
+        <input name="username" required
+               value="{{ usuario.username if usuario else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Email</label>
+        <input name="email" type="email"
+               value="{{ usuario.email if usuario else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Rol *</label>
+        <select name="id_rol" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="">— Seleccionar —</option>
+          {% for r in roles %}
+          <option value="{{ r.id_rol }}"
+                  {{ 'selected' if usuario and usuario.id_rol == r.id_rol }}>
+            {{ r.nombre }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">
+          Contraseña {% if not usuario %}*{% else %}(dejar vacío para no cambiar){% endif %}
+        </label>
+        <input name="password" type="password" minlength="8"
+               {{ 'required' if not usuario }}
+               placeholder="{{ 'Mínimo 8 caracteres' if not usuario else 'Sin cambios si se deja vacío' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      {% if usuario %}
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Estado</label>
+        <select name="estado"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="ACTIVO"    {{ 'selected' if usuario.estado == 'ACTIVO' }}>Activo</option>
+          <option value="INACTIVO"  {{ 'selected' if usuario.estado == 'INACTIVO' }}>Inactivo</option>
+        </select>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold text-sm">
+      {{ '💾 Guardar cambios' if usuario else '➕ Crear usuario' }}
+    </button>
+    <a href="{{ url_for('seguridad.usuarios_lista') }}"
+       class="bg-gray-200 text-gray-700 px-6 py-2.5 rounded-lg text-sm">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

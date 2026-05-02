@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-5">
+  <a href="{{ url_for('proveedores.lista') }}" class="text-gray-500 hover:text-gray-700 text-sm">← Proveedores</a>
+  <span class="text-gray-300">/</span>
+  <h2 class="text-xl font-bold text-gray-800">{{ titulo }}</h2>
+</div>
+
+<form method="POST" class="max-w-2xl">
+  <div class="bg-white rounded-xl shadow-sm p-5 space-y-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Razón Social *</label>
+        <input name="razon_social" required value="{{ proveedor.razon_social if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">RUC / Cédula</label>
+        <input name="ruc_cedula" value="{{ proveedor.ruc_cedula if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Nombre de Contacto</label>
+        <input name="nombre_contacto" value="{{ proveedor.nombre_contacto if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Teléfono</label>
+        <input name="telefono" value="{{ proveedor.telefono if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Celular</label>
+        <input name="celular" value="{{ proveedor.celular if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Email</label>
+        <input name="email" type="email" value="{{ proveedor.email if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Ciudad</label>
+        <input name="ciudad" value="{{ proveedor.ciudad if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Dirección</label>
+        <input name="direccion" value="{{ proveedor.direccion if proveedor else '' }}"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Estado</label>
+        <select name="estado" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+          <option value="1" {{ 'selected' if not proveedor or proveedor.estado }}>Activo</option>
+          <option value="0" {{ 'selected' if proveedor and not proveedor.estado }}>Inactivo</option>
+        </select>
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs font-medium text-gray-600 mb-1">Notas</label>
+        <textarea name="notas" rows="2"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">{{ proveedor.notas if proveedor else '' }}</textarea>
+      </div>
+    </div>
+  </div>
+  <div class="flex gap-3">
+    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-medium text-sm">Guardar</button>
+    <a href="{{ url_for('proveedores.lista') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-lg text-sm">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

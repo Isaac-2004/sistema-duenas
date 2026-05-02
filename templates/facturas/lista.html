@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Facturas{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-xl font-bold text-gray-800">Facturas</h2>
+</div>
+
+<div class="flex gap-2 mb-4">
+  {% for est, label in [('','Todas'),('EMITIDA','Emitidas'),('PAGADA','Pagadas'),('VENCIDA','Vencidas'),('ANULADA','Anuladas')] %}
+    <a href="{{ url_for('facturas.lista', estado=est) }}"
+       class="whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium {{ 'bg-gray-700 text-white' if estado_sel==est else 'bg-white border border-gray-300 text-gray-600' }}">{{ label }}</a>
+  {% endfor %}
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+        <tr>
+          <th class="px-4 py-3 text-left">N° Factura</th>
+          <th class="px-4 py-3 text-left">Cliente</th>
+          <th class="px-4 py-3 text-left hidden sm:table-cell">Fecha</th>
+          <th class="px-4 py-3 text-center">Tipo</th>
+          <th class="px-4 py-3 text-right">Total</th>
+          <th class="px-4 py-3 text-center">Estado</th>
+          <th class="px-4 py-3 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        {% for f in facturas %}
+        {% set est_col = {'EMITIDA':'blue','PAGADA':'green','VENCIDA':'red','ANULADA':'gray'} %}
+        {% set c = est_col.get(f.estado, 'gray') %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3 font-mono font-medium text-gray-700">{{ f.numero_factura }}</td>
+          <td class="px-4 py-3 text-gray-900">{{ f.cliente }}</td>
+          <td class="px-4 py-3 text-gray-600 text-xs hidden sm:table-cell">{{ f.fecha_emision.strftime('%d/%m/%Y') }}</td>
+          <td class="px-4 py-3 text-center">
+            <span class="text-xs {{ 'text-blue-600' if f.tipo_venta=='CONTADO' else 'text-orange-600' }}">{{ f.tipo_venta }}</span>
+          </td>
+          <td class="px-4 py-3 text-right font-semibold">${{ "%.2f"|format(f.total) }}</td>
+          <td class="px-4 py-3 text-center">
+            <span class="px-2 py-0.5 rounded-full text-xs bg-{{ c }}-100 text-{{ c }}-700">{{ f.estado }}</span>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <a href="{{ url_for('facturas.detalle', id=f.id_factura) }}" class="text-blue-600 hover:underline text-xs">Ver / Imprimir</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="px-4 py-8 text-center text-gray-400">No hay facturas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
