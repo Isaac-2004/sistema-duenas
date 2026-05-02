@@ -1,0 +1,49 @@
+Manual de Publicación — Render
+Primera vez (ya completado)
+1. Preparar el proyecto
+Agregar gunicorn al requirements.txt
+Crear .gitignore (excluye venv/ y __pycache__/)
+Crear render.yaml con la configuración del servicio
+2. Subir a GitHub
+
+git init
+git add .
+git commit -m "primer commit"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
+git push -u origin main
+3. Crear el servicio en Render
+Ir a render.com → New + → Web Service
+Conectar el repositorio de GitHub
+Render detecta el render.yaml automáticamente
+En Environment, agregar manualmente la variable DB_PASSWORD
+Clic en Create Web Service
+Publicar actualizaciones futuras
+Cada vez que hagas cambios en el código, ejecuta estos 3 comandos en PowerShell desde la carpeta del proyecto:
+
+
+cd "C:\Users\GIYD2\OneDrive\Documentos\Proyectos\ProyectoDistribuidoraDuenas\SistemaDeGestion"
+git add .
+git commit -m "descripcion del cambio"
+git push
+Render detecta el push automáticamente y redespiega la app en 2-3 minutos. No hay que hacer nada más en Render.
+
+Ejemplos de mensajes de commit
+
+git commit -m "corrige error en cierre de dia"
+git commit -m "agrega reloj en dashboard"
+git commit -m "nuevo modulo de reportes"
+Verificar el deploy
+Después de cada push puedes ver el progreso en:
+
+Render dashboard → tu servicio → pestaña "Events" o "Logs"
+
+Cuando aparece ==> Your service is live el deploy terminó.
+
+Variables de entorno (si necesitas cambiarlas)
+Render dashboard → tu servicio → Environment
+
+Ahí puedes modificar DB_PASSWORD, SECRET_KEY y otras variables sin tocar el código.
+
+Aviso — Plan gratuito de Render
+El plan gratuito duerme la app tras 15 minutos sin visitas. La primera visita después tarda ~30 segundos. Para uso diario de negocio el plan Starter ($7/mes) mantiene la app siempre activa.

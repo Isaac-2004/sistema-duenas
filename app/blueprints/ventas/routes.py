@@ -194,9 +194,9 @@ def _crear_venta():
             try:
                 num_f = int(ultima_fac['numero_factura'].split('-')[-1]) + 1
             except Exception:
-                num_f = 1
+                num_f = config.FACTURA_INICIO + 1
         else:
-            num_f = 1
+            num_f = config.FACTURA_INICIO + 1
         numero_factura = f'FAC-{num_f:06d}'
 
         execute(

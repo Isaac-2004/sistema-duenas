@@ -12,6 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'cambiar-esta-clave-en-produccion-xyz9
 
 # Negocio
 IVA_RATE          = 0.15
+FACTURA_INICIO    = 2298   # La siguiente factura será 2299
 NOMBRE_EMPRESA    = 'Distribuidora Dueñas'
 RUC_EMPRESA       = ''
 TELEFONO_EMPRESA  = ''
